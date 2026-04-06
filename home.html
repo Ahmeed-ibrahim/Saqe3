@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Saqe3 - Fresh Juice</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav id="nav">
+      <div class="logo"><img src="Assets/img/logo.png" alt="Logo" /></div>
+      <div class="nav-links">
+        <ul>
+          <li><a href="home.html">home</a></li>
+          <li><a href="Juice-list.html">Juice list</a></li>
+          <li><a href="about-us.html">About us</a></li>
+          <li><a href="contact-us.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div id="nav" class="side-nav">
+      <ul>
+        <li class="active">
+          <i class="fa-solid fa-house"></i> <a href="home.html">home</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-glass-water"></i>
+          <a href="Juice-list.html">Juice list</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-info"></i
+          ><a href="about-us.html">About us</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-envelope"></i>
+          <a href="contact-us.html">Contact us</a>
+        </li>
+      </ul>
+    </div>
+
+    <section class="viva">
+      <div class="viva-content">
+        <h1>Fresh Juice</h1>
+        <button>Order now</button>
+      </div>
+    </section>
+
+    <div class="slider-container">
+      <button class="prev"><i class="fa-solid fa-chevron-right"></i></button>
+
+      <div class="slider">
+        <div class="slider-track">
+          <div class="image-box"><img src="Assets/img/Berries.jpg" /></div>
+          <div class="image-box"><img src="Assets/img/chocolate.jpg" /></div>
+          <div class="image-box"><img src="Assets/img/Lemon.jpg" /></div>
+          <div class="image-box"><img src="Assets/img/Pistachio.jpg" /></div>
+          <div class="image-box"><img src="Assets/img/Strawberry.jpg" /></div>
+          <div class="image-box"><img src="Assets/img/tot.jpg" /></div>
+          <div class="image-box"><img src="Assets/img/Avocado.jpg" /></div>
+          <div class="image-box"><img src="Assets/img/mango.jpg" /></div>
+        </div>
+      </div>
+
+      <button class="next"><i class="fa-solid fa-chevron-left"></i></button>
+    </div>
+
+    <script>  // استخدمت ال Ai لحد م ربنا يكرم واتعلم الجافا 4.6.2026
+      const slider = document.querySelector(".slider-track");
+      const nextBtn = document.querySelector(".next");
+      const prevBtn = document.querySelector(".prev");
+
+      // حساب عرض الصورة + الفراغ بينها وبين اللي بعدها
+      const getStepWidth = () => {
+        const box = document.querySelector(".image-box");
+        return box.offsetWidth + 20;
+      };
+
+      // زر اليمين (السابق في RTL)
+      prevBtn.onclick = () => {
+        slider.scrollBy({ left: getStepWidth(), behavior: "smooth" });
+      };
+
+      // زر الشمال (التالي في RTL)
+      nextBtn.onclick = () => {
+        slider.scrollBy({ left: -getStepWidth(), behavior: "smooth" });
+      };
+
+      // ميزة السحب بالماوس (Drag to Scroll)
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      slider.addEventListener("mousedown", (e) => {
+        isDown = true;
+        slider.style.scrollBehavior = "auto"; // تعطيل الـ Smooth أثناء السحب اليدوي
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener("mouseleave", () => {
+        isDown = false;
+      });
+      slider.addEventListener("mouseup", () => {
+        isDown = false;
+        slider.style.scrollBehavior = "smooth";
+      });
+
+      slider.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5; // سرعة السحب
+        slider.scrollLeft = scrollLeft - walk;
+      });
+    </script>
+    <footer>
+      <p>&copy; 2026 Saqe3 Juice Bar. All rights reserved.</p>
+      <div class="social-icons">
+        <ul>
+          <li><a href="https://web.facebook.com/ahmed.ibrahim.664312?locale=ar_AR"><i class="fa-brands fa-facebook"></i></a></li>
+          <li><a href="https://www.instagram.com/ahmed_lbrahiim/"><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href="https://wa.me/201025081281"><i class="fa-brands fa-whatsapp"></i></a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
